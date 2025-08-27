@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chúc mừng sinh nhật 💖</title>
+  <meta name="description" content="Trang chúc mừng sinh nhật với hiệu ứng trái tim rơi vô hạn" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1:#ffeff6;
+      --bg-2:#ffe1ec;
+      --bg-3:#ffd3e3;
+      --accent:#ff4d87;
+      --accent-2:#ff7aa2;
+      --card:#ffffffaa;
+      --text:#221b22;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      overflow:hidden;
+      background: radial-gradient(1200px 800px at 10% 10%, var(--bg-2), transparent 60%),
+                  radial-gradient(1000px 700px at 90% 0%, var(--bg-3), transparent 60%),
+                  linear-gradient(135deg, var(--bg-1), #fff);
+      animation:bgPulse 18s ease-in-out infinite;
+    }
+    @keyframes bgPulse{
+      0%,100%{filter:hue-rotate(0deg)}
+      50%{filter:hue-rotate(-10deg)}
+    }
+
+    .wrap{
+      position:relative;
+      width:100%; height:100%;
+      display:grid; place-items:center;
+      padding:24px;
+    }
+
+    .card{
+      position:relative;
+      width:min(720px, 92vw);
+      padding:28px 28px 24px;
+      border-radius:24px;
+      backdrop-filter: blur(10px);
+      background: var(--card);
+      box-shadow: 0 20px 50px #ff6d8f2b, 0 4px 12px #00000014;
+      overflow:hidden;
+    }
+    .ribbon{
+      position:absolute; inset:auto -20px -20px auto;
+      font: 700 12px/1 Poppins, sans-serif;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color:#fff; padding:10px 16px; border-radius:999px;
+      transform: rotate(-6deg);
+      box-shadow: 0 6px 16px #ff4d8744;
+    }
+    .title{
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    }
+    .title h1{
+      margin:0; font-weight:800; letter-spacing:0.2px;
+      font-size: clamp(28px, 5vw, 44px);
+      background: linear-gradient(90deg, #ff2471, #ff8fb3);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow: 0 1px 0 rgba(255,255,255,.4);
+    }
+    .title .script{
+      font-family: 'Great Vibes', cursive; font-size: clamp(26px, 4.5vw, 40px);
+      color:#ff2c7a; margin-left:auto;
+    }
+
+    .content{margin-top:16px; display:grid; grid-template-columns: 120px 1fr; gap:16px; align-items:center}
+    @media (max-width:640px){.content{grid-template-columns:1fr}}
+
+    .avatar{
+      width:120px; height:120px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #ffd6e6, #ffc2d9);
+      display:grid; place-items:center; font-size:42px; color:#ff2a74;
+      box-shadow: inset 0 4px 10px #ffffffaa, 0 6px 16px #ff4d8755;
+      border: 6px solid #fff8;
+      margin:auto;
+    }
+
+    .msg{
+      font-size:clamp(16px, 2.4vw, 20px);
+      line-height:1.6; margin:0; color:#5d3a44;
+    }
+
+    .controls{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;
+    }
+    .btn{
+      border:0; cursor:pointer; padding:12px 16px; border-radius:14px;
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      color:#fff; font-weight:700; letter-spacing:.2px;
+      box-shadow: 0 8px 20px #ff4d8750, 0 2px 6px #ff4d8740;
+      transition: transform .08s ease, filter .2s ease;
+    }
+    .btn:active{ transform: translateY(1px) scale(.99) }
+    .btn.ghost{
+      background:#ffffffcc; color:#ff2a74; border:1px solid #ffd1e1;
+      box-shadow: 0 6px 16px #00000010;
+    }
+
+    .footer{margin-top:16px; font-size:13px; opacity:.75}
+
+    /* Hearts */
+    .hearts{
+      position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;
+    }
+    .card{z-index:1}
+
+    @keyframes fall{
+      0%{ transform:translateY(-10vh) scale(var(--s)) rotate(0turn); opacity:0 }
+      10%{ opacity:1 }
+      100%{ transform:translateY(110vh) scale(var(--s)) rotate(var(--rot)); opacity:0.9 }
+    }
+    .heart{
+      position:absolute; top:-10vh; left:0;
+      font-size: clamp(16px, 3.6vw, 28px);
+      will-change: transform, opacity;
+      animation: fall var(--dur) linear forwards;
+      filter: drop-shadow(0 4px 8px rgba(255, 77, 135, .25));
+      user-select:none;
+    }
+
+    /* Tiny sparkle */
+    .sparkle{ position:absolute; width:6px; height:6px; border-radius:50%; background:#fff; opacity:.9; filter:blur(.2px); animation: sparkle .9s ease-out forwards }
+    @keyframes sparkle{ from{transform:scale(.4); opacity:.9} to{transform:scale(1.6); opacity:0} }
+  </style>
+</head>
+<body>
+  <div class="hearts" aria-hidden="true" id="hearts"></div>
+
+  <div class="wrap">
+    <div class="card">
+      <span class="ribbon">Mai thuong 💘</span>
+      <div class="title">
+        <h1>Chúc mừng sinh nhật!</h1>
+        <div class="script" id="loveTag">yeu Ngọc Ánh nhiều 💗</div>
+      </div>
+
+      <div class="content">
+        <div class="avatar" aria-hidden="true">💝</div>
+        <div>
+          <p class="msg" id="message">
+            Chúc <strong id="name">Ngọc Ánh</strong> thêm một tuổi mới thật rực rỡ: luôn khỏe mạnh, hạnh phúc, mọi ước mơ đều thành hiện thực. Cảm ơn bn vì đã đến bên to như một món quà! ✨
+          </p>
+          <div class="controls">
+            <button class="btn ghost" id="toggle">Tắt mưa tim</button>
+            <button class="btn" id="burst">Bắn tim 💞</button>
+          </div>
+          <div class="footer">Nhấn <em>Bắn tim</em> để bùng nổ trái tim ngay lập tức 💥</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ========== Hearts rain ==========
+    const heartsLayer = document.getElementById('hearts');
+    let running = true;
+    let totalOnDom = 0;
+    const MAX_HEARTS = 160; // tránh nặng máy
+
+    function makeHeart(opts={}){
+      if(totalOnDom > MAX_HEARTS) return;
+      const span = document.createElement('span');
+      span.className = 'heart';
+      span.textContent = Math.random() < .15 ? '💘' : (Math.random() < .6 ? '💖' : '💗');
+
+      const left = Math.random() * 100; // vw
+      const size = (Math.random() * 0.9 + 0.55).toFixed(2); // scale
+      const rotTurns = (Math.random() * 1.5 + .2).toFixed(2) + 'turn';
+      const dur = (Math.random() * 6 + 6).toFixed(2) + 's';
+
+      span.style.left = `calc(${left}vw - 12px)`;
+      span.style.setProperty('--s', size);
+      span.style.setProperty('--rot', rotTurns);
+      span.style.setProperty('--dur', dur);
+
+      heartsLayer.appendChild(span);
+      totalOnDom++;
+
+      const removeAfter = (parseFloat(dur) * 1000) + 200;
+      setTimeout(() => { span.remove(); totalOnDom--; }, removeAfter);
+    }
+
+    // steady rain
+    let ticker = null;
+    function startRain(){
+      if(ticker) return;
+      ticker = setInterval(()=>{
+        // tạo 1-3 trái tim mỗi nhịp
+        const n = 1 + Math.floor(Math.random()*2);
+        for(let i=0;i<n;i++) makeHeart();
+      }, 160);
+    }
+    function stopRain(){ if(ticker){ clearInterval(ticker); ticker=null; } }
+
+    // toggle button
+    const toggle = document.getElementById('toggle');
+    toggle.addEventListener('click', ()=>{
+      running = !running;
+      if(running){ startRain(); toggle.textContent = 'Tắt mưa tim'; }
+      else { stopRain(); toggle.textContent = 'Bật mưa tim'; }
+    });
+
+    // initial
+    startRain();
+
+    // ========== Heart burst on demand ==========
+    const burstBtn = document.getElementById('burst');
+    burstBtn.addEventListener('click', ()=>{
+      for(let i=0;i<28;i++){
+        makeHeart();
+      }
+    });
+
+    // Bonus: heart trail on click/tap
+    window.addEventListener('pointerdown', ()=>{
+      for(let i=0;i<6;i++){
+        setTimeout(()=>{
+          makeHeart();
+        }, i*50);
+      }
+    });
+  </script>
+</body>
+</html>
