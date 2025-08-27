@@ -1,105 +1,144 @@
-<style>
-  :root{
-    --bg-1:#0d0b10;
-    --bg-2:#1a1520;
-    --bg-3:#2a1d30;
-    --accent:#ff4d87;
-    --accent-2:#ff7aa2;
-    --card:#ffffff12;
-    --text:#f7f2f7;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    color:var(--text);
-    overflow:hidden;
-    background: radial-gradient(1200px 800px at 10% 10%, var(--bg-2), transparent 60%),
-                radial-gradient(1000px 700px at 90% 0%, var(--bg-3), transparent 60%),
-                linear-gradient(135deg, var(--bg-1), #1b1520);
-    animation:bgPulse 18s ease-in-out infinite;
-  }
-  @keyframes bgPulse{
-    0%,100%{filter:hue-rotate(0deg)}
-    50%{filter:hue-rotate(15deg)}
-  }
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chúc Mừng Sinh Nhật 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1:#0d0b10;
+      --bg-2:#1a1520;
+      --bg-3:#2a1d30;
+      --accent:#ff4d87;
+      --accent-2:#ff7aa2;
+      --card:#ffffff12;
+      --text:#f7f2f7;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      color:var(--text);
+      overflow:hidden;
+      background: radial-gradient(1200px 800px at 10% 10%, var(--bg-2), transparent 60%),
+                  radial-gradient(1000px 700px at 90% 0%, var(--bg-3), transparent 60%),
+                  linear-gradient(135deg, var(--bg-1), #1b1520);
+      animation:bgPulse 18s ease-in-out infinite;
+    }
+    @keyframes bgPulse{
+      0%,100%{filter:hue-rotate(0deg)}
+      50%{filter:hue-rotate(15deg)}
+    }
 
-  .wrap{
-    position:relative;
-    width:100%; height:100%;
-    display:grid; place-items:center;
-    padding:24px;
-  }
+    .wrap{
+      position:relative;
+      width:100%; height:100%;
+      display:grid; place-items:center;
+      padding:24px;
+    }
 
-  .card{
-    position:relative;
-    width:min(720px, 92vw);
-    padding:28px 28px 24px;
-    border-radius:24px;
-    backdrop-filter: blur(14px);
-    background: var(--card);
-    box-shadow: 0 20px 50px #000000aa, 0 4px 12px #00000066;
-    overflow:hidden;
-  }
-  .ribbon{
-    position:absolute; inset:auto -20px -20px auto;
-    font: 700 12px/1 Poppins, sans-serif;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    color:#fff; padding:10px 16px; border-radius:999px;
-    transform: rotate(-6deg);
-    box-shadow: 0 6px 16px #ff4d8744;
-  }
-  .title{
-    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
-  }
-  .title h1{
-    margin:0; font-weight:800; letter-spacing:0.2px;
-    font-size: clamp(28px, 5vw, 44px);
-    background: linear-gradient(90deg, #ff6aa5, #ff98bd);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    text-shadow: 0 1px 4px rgba(255,0,80,.4);
-  }
-  .title .script{
-    font-family: 'Great Vibes', cursive; font-size: clamp(26px, 4.5vw, 40px);
-    color:#ffb6d9; margin-left:auto;
-    text-shadow:0 0 6px #ff2c7a88;
-  }
+    .card{
+      position:relative;
+      width:min(720px, 92vw);
+      padding:28px 28px 24px;
+      border-radius:24px;
+      backdrop-filter: blur(14px);
+      background: var(--card);
+      box-shadow: 0 20px 50px #000000aa, 0 4px 12px #00000066;
+      overflow:hidden;
+      z-index:1;
+    }
+    .ribbon{
+      position:absolute; inset:auto -20px -20px auto;
+      font: 700 12px/1 Poppins, sans-serif;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color:#fff; padding:10px 16px; border-radius:999px;
+      transform: rotate(-6deg);
+      box-shadow: 0 6px 16px #ff4d8744;
+    }
+    .title{
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    }
+    .title h1{
+      margin:0; font-weight:800; letter-spacing:0.2px;
+      font-size: clamp(28px, 5vw, 44px);
+      background: linear-gradient(90deg, #ff6aa5, #ff98bd);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow: 0 1px 4px rgba(255,0,80,.4);
+    }
+    .title .script{
+      font-family: 'Great Vibes', cursive; font-size: clamp(26px, 4.5vw, 40px);
+      color:#ffb6d9; margin-left:auto;
+      text-shadow:0 0 6px #ff2c7a88;
+    }
 
-  .content{margin-top:16px; display:grid; grid-template-columns: 120px 1fr; gap:16px; align-items:center}
-  @media (max-width:640px){.content{grid-template-columns:1fr}}
+    .content{margin-top:16px; display:grid; grid-template-columns: 120px 1fr; gap:16px; align-items:center}
+    @media (max-width:640px){.content{grid-template-columns:1fr}}
 
-  .avatar{
-    width:120px; height:120px; border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, #ff3377, #ff0055);
-    display:grid; place-items:center; font-size:42px; color:#fff;
-    box-shadow: inset 0 4px 10px #ffffff33, 0 6px 16px #ff005577;
-    border: 4px solid #fff2;
-    margin:auto;
-  }
+    .avatar{
+      width:120px; height:120px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #ff3377, #ff0055);
+      display:grid; place-items:center; font-size:42px; color:#fff;
+      box-shadow: inset 0 4px 10px #ffffff33, 0 6px 16px #ff005577;
+      border: 4px solid #fff2;
+      margin:auto;
+    }
 
-  .msg{
-    font-size:clamp(16px, 2.4vw, 20px);
-    line-height:1.6; margin:0; color:#f0d9e6;
-  }
+    .msg{
+      font-size:clamp(16px, 2.4vw, 20px);
+      line-height:1.6; margin:0; color:#f0d9e6;
+    }
 
-  /* Hearts */
-  .hearts{
-    position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;
-  }
-  .card{z-index:1}
+    /* Hearts */
+    .hearts{
+      position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;
+    }
+    @keyframes fall{
+      0%{ transform:translateY(-10vh) scale(var(--s)) rotate(0turn); opacity:0 }
+      10%{ opacity:1 }
+      100%{ transform:translateY(110vh) scale(var(--s)) rotate(var(--rot)); opacity:0.9 }
+    }
+    .heart{
+      position:absolute; top:-10vh; left:0;
+      font-size: clamp(16px, 3.6vw, 28px);
+      will-change: transform, opacity;
+      animation: fall var(--dur) linear forwards;
+      filter: drop-shadow(0 4px 8px rgba(255, 90, 140, .6));
+      user-select:none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="ribbon">Happy Birthday</div>
+      <div class="title">
+        <h1>Chúc mừng sinh nhật</h1>
+        <div class="script">❤️</div>
+      </div>
+      <div class="content">
+        <div class="avatar">🎂</div>
+        <p class="msg">Chúc bạn luôn vui vẻ, hạnh phúc và thành công trong mọi điều bạn làm! 🌟</p>
+      </div>
+    </div>
+  </div>
 
-  @keyframes fall{
-    0%{ transform:translateY(-10vh) scale(var(--s)) rotate(0turn); opacity:0 }
-    10%{ opacity:1 }
-    100%{ transform:translateY(110vh) scale(var(--s)) rotate(var(--rot)); opacity:0.9 }
-  }
-  .heart{
-    position:absolute; top:-10vh; left:0;
-    font-size: clamp(16px, 3.6vw, 28px);
-    will-change: transform, opacity;
-    animation: fall var(--dur) linear forwards;
-    filter: drop-shadow(0 4px 8px rgba(255, 90, 140, .6));
-    user-select:none;
-  }
-</style>
+  <div class="hearts"></div>
+
+  <script>
+    const hearts=document.querySelector(".hearts");
+    setInterval(()=>{
+      const h=document.createElement("div");
+      h.className="heart";
+      h.innerText="💖";
+      h.style.left=Math.random()*100+"vw";
+      h.style.setProperty("--s",(Math.random()*0.6+0.4).toFixed(2));
+      h.style.setProperty("--dur",(Math.random()*4+6).toFixed(2)+"s");
+      h.style.setProperty("--rot",(Math.random()*2).toFixed(2)+"turn");
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(),10000);
+    },500);
+  </script>
+</body>
+</html>
