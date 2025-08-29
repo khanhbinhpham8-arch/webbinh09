@@ -1,54 +1,152 @@
 <!DOCTYPE html>
-<html>
-    <head>
-      <title>Trang chủ</title>
-      <meta charset="utf-8">
-      <!-- <link rel="stylesheet" href="main.css"> -->
-      <style>
-            .box{
-            height: 60px;
-            width: 100%;
-            background-color: orange;
-            position: fixed;
-            top: 0;
-            left:0;
-            }
-            body {
-                background-color: #ccc;
-            }
-            h1{
-                font-size: 40px;
-                margin-top: 80px;
-            }
-            .web {
-                height: 12000px;
-            }
-            .web-first {
-                color: black;
-                list-style: none;
-                font-size: 20px;
-                display: flex;
-                /* background-color: blue; */
-                gap: 20px;
-            }
-            a {
-                text-decoration: none;
-                color: black;
-            }
-            a:hover {
-                color: aqua;
-            }
-      </style>
-    </head>
-    <body>
-      <div class="box">
-          <ul class="web-first">
-              <li><a href="index.html">Trang chủ</a></li>
-              <li><a href="file1.html">Giới thiệu trang</a></li>
-          </ul>
-      </div>
-      <h1>Chào mừng đến với trang web</h1>
-      <!-- <h2 class="gioi-thieu">Trên thế giới internet rộng lớn <br>chúng ta có hàng tỷ website phục vụ đủ mọi mục đích: mua sắm, học tập, giải trí… <br> Nhưng đôi khi, tồn tại những trang web chẳng hề có một công dụng thực tế nào cả <br> Và hôm nay, xin giới thiệu đến bạn một trong số đó – một trang web hoàn toàn vô dụng.</h2> -->
-      <ul class="web"></ul>
-    </body>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bạn có xinh không?</title>
+  <style>
+    :root { --btn-size: 56px; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      display: grid;
+      place-items: center;
+      background: #fff;
+      overflow: hidden; /* để tim rơi vô hạn mà không có thanh cuộn */
+    }
+    .wrap {
+      position: relative;
+      text-align: center;
+      padding: 24px;
+    }
+    h1 { margin: 0 0 16px; font-size: 28px; }
+    .actions { display: inline-flex; gap: 12px; }
+    button {
+      min-width: 80px; height: var(--btn-size);
+      padding: 0 16px; border-radius: 999px; border: 0; cursor: pointer;
+      font-size: 18px; font-weight: 600;
+      background: #111; color: #fff;
+      transition: transform .08s ease;
+      position: relative;
+    }
+    button:active { transform: scale(0.97); }
+    #noBtn.moving { position: fixed; z-index: 3; }
+    #msg { margin-top: 16px; font-size: 22px; font-weight: 700; }
+
+    /* Tim rơi */
+    .heart {
+      position: fixed;
+      top: -10vh;
+      left: 0;
+      font-size: 16px;
+      line-height: 1;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+      user-select: none;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+      5%   { opacity: 1; }
+      100% { transform: translateY(120vh) rotate(360deg); opacity: 0.9; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Bạn có xinh không?</h1>
+    <div class="actions">
+      <button id="yesBtn">Có</button>
+      <button id="noBtn">Không</button>
+    </div>
+    <div id="msg" aria-live="polite"></div>
+  </div>
+
+  <script>
+    // Âm thanh "píng pong" bằng Web Audio (2 tiếng bíp khác cao độ)
+    function playPingPong() {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      const ctx = new AudioCtx();
+      const now = ctx.currentTime;
+      const gain = ctx.createGain();
+      gain.connect(ctx.destination);
+      gain.gain.setValueAtTime(0.0001, now);
+
+      // tone 1
+      const osc1 = ctx.createOscillator();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(900, now);
+      osc1.connect(gain);
+      gain.gain.exponentialRampToValueAtTime(0.4, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+      osc1.start(now);
+      osc1.stop(now + 0.16);
+
+      // tone 2 (pong) sau 120ms
+      const osc2 = ctx.createOscillator();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(1200, now + 0.18);
+      osc2.connect(gain);
+      gain.gain.setValueAtTime(0.0001, now + 0.18);
+      gain.gain.exponentialRampToValueAtTime(0.45, now + 0.19);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.36);
+      osc2.start(now + 0.18);
+      osc2.stop(now + 0.36);
+
+      // auto close context để tiết kiệm tài nguyên
+      setTimeout(() => ctx.close(), 500);
+    }
+
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn  = document.getElementById('noBtn');
+    const msg    = document.getElementById('msg');
+
+    yesBtn.addEventListener('click', () => {
+      msg.textContent = 'đúng roiii';
+      playPingPong();
+    });
+
+    // Khi cố chọn "Không" thì nó chạy sang chỗ khác
+    function moveNoButton() {
+      if (!noBtn.classList.contains('moving')) {
+        noBtn.classList.add('moving');
+      }
+      const pad = 10; // lề để không chệch màn hình
+      const maxX = Math.max(0, window.innerWidth - noBtn.offsetWidth - pad);
+      const maxY = Math.max(0, window.innerHeight - noBtn.offsetHeight - pad);
+      const x = Math.floor(Math.random() * (maxX + 1));
+      const y = Math.floor(Math.random() * (maxY + 1));
+      noBtn.style.left = x + 'px';
+      noBtn.style.top  = y + 'px';
+    }
+
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+
+    // Hiệu ứng trái tim rơi xuống vô hạn
+    const hearts = ['❤','💖','💗','💓','💞','💕'];
+    function spawnHeart() {
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      const size = 12 + Math.random() * 28; // 12–40px
+      h.style.fontSize = size + 'px';
+      h.style.left = Math.random() * 100 + 'vw';
+      const dur = 6 + Math.random() * 8; // 6–14s
+      h.style.animationDuration = dur + 's';
+      document.body.appendChild(h);
+      // Xoá khi rơi xong để không bị đầy DOM
+      h.addEventListener('animationend', () => h.remove());
+    }
+
+    // tạo liên tục, nhưng tiết kiệm tài nguyên
+    setInterval(spawnHeart, 220);
+  </script>
+</body>
 </html>
